@@ -1,12 +1,12 @@
 // from data.js
 var tableData = data;
 
-// view the data
+// view the data in the consoul
 console.log(tableData);
 
 
-// reference variables
-var $tbody = d3.select("tbody");
+// variables
+var pbody = d3.select("tbody");
 var button = d3.select("#filter-btn");
 var inputFieldDate = d3.select("#datetime");
 var inputFieldCity = d3.select("#city");
@@ -15,7 +15,7 @@ var columns = ["datetime", "city", "state", "country", "shape", "durationMinutes
 // add the data to the page
 var addData = (dataInput) => {
     dataInput.forEach(ufoSightings => {
-        var row = $tbody.append("tr");
+        var row = pbody.append("tr");
         columns.forEach(column => row.append("td").text(ufoSightings[column])
         )
     });
@@ -29,17 +29,19 @@ button.on("click", () => {
 
     d3.event.preventDefault();
     var inputDate = inputFieldDate.property("value").trim();
-    var filterDate = tableData.filter(tableData => tableData.datetime === inputDate);
-    $tbody.html("");
+    var filter = tableData.filter(tableData => tableData.datetime === inputDate)
+    //var inputCity = inputField.property("value").lowercase();
+    //var filter = tableData.filter(tableData => tableData.datetime === inputDate) || tableData.filter(tableData => tableData.city === inputCity);
+    pbody.html("");
 
     let response = {
-        filterDate
+        filter
     }
 
-    if(response.filterDate.length !== 0) {
-        addData(filterDate);
+    if(response.filter.length !== 0) {
+        addData(filter);
     }
         else {
-            $tbody.append("tr").append("td").text("No Sightings Here...Move On...");
+            pbody.append("tr").append("td").text("No Sightings Here...Move On...");
         }
 })
