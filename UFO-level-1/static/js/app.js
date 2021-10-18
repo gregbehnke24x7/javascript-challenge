@@ -1,9 +1,8 @@
 // from data.js
 var tableData = data;
 
-// view the data in the consoul
+// view the data in the console
 console.log(tableData);
-
 
 // variables
 var pbody = d3.select("tbody");
@@ -22,7 +21,6 @@ var addData = (dataInput) => {
 }
 
 addData(tableData);
-
 
 // create event listener for button clickiness
 button.on("click", () => {
