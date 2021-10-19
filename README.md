@@ -1,2 +1,0 @@
-# javascript-challenge
-javascript homework
