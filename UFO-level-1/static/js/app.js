@@ -26,19 +26,34 @@ addData(tableData);
 button.on("click", () => {
 
     d3.event.preventDefault();
+    // date filter elements
     var inputDate = inputFieldDate.property("value").trim();
-    var filter = tableData.filter(tableData => tableData.datetime === inputDate)
-    //var inputCity = inputField.property("value").lowercase();
-    //var filter = tableData.filter(tableData => tableData.datetime === inputDate) || tableData.filter(tableData => tableData.city === inputCity);
+    console.log(inputDate)
+    var dateFilter = tableData.filter(tableData => tableData.datetime === inputDate); 
+    // city filter elements
+    var inputCity = inputFieldCity.property("value").toLowerCase().trim();
+    console.log(inputCity)
+    var cityFilter = tableData.filter(tableData => tableData.city === inputCity);
+
     pbody.html("");
-
-    let response = {
-        filter
+    // react to filter on date input
+    let responseDate = {
+        dateFilter
+    }
+    // react to filter on city input
+    let responseCity = {
+        cityFilter
     }
 
-    if(response.filter.length !== 0) {
-        addData(filter);
+    // handle date filter first
+    if(responseDate.dateFilter.length !== 0) {
+            addData(dateFilter);
     }
+        // then handle city filter
+        else if(responseCity.cityFilter.length !== 0) {
+            addData(cityFilter);
+        }
+        // if no results returned
         else {
             pbody.append("tr").append("td").text("No Sightings Here...Move On...");
         }
